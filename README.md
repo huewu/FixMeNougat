@@ -12,3 +12,11 @@
 6. 확장 라이브러리 읽기 버튼을 클릭한 후 잠시 시간이 지나면 앱이 종료됩니다.
 7. 앱이 Doze on the go (Extended Doze)모드에 진입하면 네트워크 연결이 끊깁니다.
 8. 리스트뷰에 포함된 Search EditText 위젯 상에서 한글 입력을 할 수 없습니다.
+
+# Extended Doze 테스트하기
+1. adb shell dumpsys battery unplug
+2. Turn off screen
+3. adb shell dumpsys deviceidle step light // PRE_IDLE
+4. adb shell dumpsys deviceidle step light // IDLE
+5. adb shell dumpsys deviceidle step light // IDLE_MAINTENANCE
+
