@@ -1,8 +1,8 @@
 # FixMeNougat
 안드로이드 누가 버전에서 정상적으로 동작하도록 앱을 수정해주세요.
 
-# Compatibility Issue List
-다음과 같은 상황에서 오류가 발생합니다.
+# Compatibility Issue List (12nd Sep, 2016)
+누가 버전에서 앱을 실행 시 다음과 같은 상황에서 오류가 발생합니다.
 
 1. 멀티윈도우 모드 진입시 앱이 종료될 수 있습니다.
 2. 멀티윈도우 모드상에서 Load Image 버튼을 클릭하면 앱이 종료됩니다.
