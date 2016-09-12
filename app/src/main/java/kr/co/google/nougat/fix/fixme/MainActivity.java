@@ -2,12 +2,15 @@ package kr.co.google.nougat.fix.fixme;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -19,36 +22,65 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 import dalvik.system.DexFile;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "MainActivity";
+    private Handler leakingHandler;
+    private static final int CHANGE_BUTTON_LABEL = 1003;
+    private byte[] someBuffer = new byte[1024 * 1024];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Arrays.fill(someBuffer, (byte) 1);
+
         ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(new MyListAdapter(this));
-        Button sendMessage = (Button) findViewById(R.id.connServer);
-        Button loadLib = (Button) findViewById(R.id.loadExtLib);
+
+        Button sendMessage = (Button) findViewById(R.id.conn_server);
+        Button loadImage = (Button) findViewById(R.id.load_image);
+        Button loadLib = (Button) findViewById(R.id.load_lib);
+        final Button changeLabel = (Button) findViewById(R.id.change_label);
 
         sendMessage.setOnClickListener(this);
         loadLib.setOnClickListener(this);
+        loadImage.setOnClickListener(this);
+        changeLabel.setOnClickListener(this);
+
+        leakingHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+
+                switch (msg.what) {
+                    case CHANGE_BUTTON_LABEL:
+                        changeLabel.setText("Label is changed");
+                        break;
+                }
+            }
+        };
     }
 
     @Override
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.connServer:
+            case R.id.conn_server:
                 MyNetworkService.startService(this);
                 break;
-            case R.id.loadExtLib:
+            case R.id.load_lib:
                 loadExpansionLibrary();
+                break;
+            case R.id.change_label:
+                leakingHandler.sendEmptyMessage(CHANGE_BUTTON_LABEL);
+                break;
+            case R.id.load_image:
+                ((ImageView) findViewById(R.id.splash_logo)).setImageResource(R.drawable.fixme_splash);
                 break;
         }
     }

@@ -2,5 +2,7 @@
     <string name="app_name">FixMe</string>
     <string name="txt_conn_server">Connect to Server</string>
     <string name="txt_load_expansion">Load Library</string>
-    <string name="search">Search</string>>
+    <string name="search">Search</string>
+    <string name="txt_change_label">Simple Label Text</string>
+    <string name="txt_load_image">Load Image</string>>
 </resources>

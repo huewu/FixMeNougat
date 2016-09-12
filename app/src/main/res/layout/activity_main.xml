@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -8,41 +8,58 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="kr.co.google.nougat.fix.fixme.MainActivity">
 
-    <ImageView
-        android:id="@+id/splash_logo"
-        android:layout_alignParentTop="true"
-        android:layout_width="@dimen/logo_width"
-        android:layout_height="@dimen/logo_height"
-        android:scaleType="centerInside"
-        android:src="@drawable/fixme_splash"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/splash_logo"
+            android:layout_alignParentTop="true"
+            android:layout_width="@dimen/logo_width"
+            android:layout_height="@dimen/logo_height"
+            android:scaleType="centerInside" />
+
+        <Button
+            android:id="@+id/load_image"
+            android:layout_toRightOf="@id/splash_logo"
+            android:layout_alignTop="@id/splash_logo"
+            android:layout_alignBottom="@id/splash_logo"
+            android:text="@string/txt_load_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
 
     <Button
-        android:id="@+id/connServer"
-        android:layout_toRightOf="@id/splash_logo"
-        android:layout_alignTop="@id/splash_logo"
+        android:id="@+id/conn_server"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:text="@string/txt_conn_server"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/loadExtLib"
+        android:id="@+id/load_lib"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:text="@string/txt_load_expansion"
-        android:layout_toRightOf="@id/splash_logo"
-        android:layout_alignBottom="@id/splash_logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <Button
+        android:id="@+id/change_label"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:text="@string/txt_change_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <ListView
         android:id="@+id/list"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:layout_below="@id/splash_logo"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </ListView>
 
-</RelativeLayout>
+</LinearLayout>
